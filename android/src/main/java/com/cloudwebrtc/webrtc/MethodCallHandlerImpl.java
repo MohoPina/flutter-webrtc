@@ -122,8 +122,6 @@ public class MethodCallHandlerImpl implements MethodCallHandler, StateProvider {
 
   private AudioDeviceModule audioDeviceModule;
 
-  private FlutterRTCFrameCryptor frameCryptor;
-
   private Activity activity;
 
   private CustomVideoEncoderFactory videoEncoderFactory;
@@ -173,8 +171,6 @@ public class MethodCallHandlerImpl implements MethodCallHandler, StateProvider {
     getUserMediaImpl = new GetUserMediaImpl(this, context);
 
     cameraUtils = new CameraUtils(getUserMediaImpl, activity);
-
-    frameCryptor = new FlutterRTCFrameCryptor(this);
 
     AudioAttributes audioAttributes = null;
     if (androidAudioConfiguration != null) {
@@ -1008,9 +1004,6 @@ public class MethodCallHandlerImpl implements MethodCallHandler, StateProvider {
         break;
       }
       default:
-        if(frameCryptor.handleMethodCall(call, result)) {
-          break;
-        }
         result.notImplemented();
         break;
     }
